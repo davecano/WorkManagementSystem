@@ -1,0 +1,289 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="teacher.master.cs" Inherits="TeachersTeacher" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="author" content="ThemeBucket" />
+  <link rel="shortcut icon" href="#" type="image/png" />
+
+  <title>教师界面</title>
+        <!--data table-->
+  <link rel="stylesheet" href="../js/data-tables/DT_bootstrap.css" />
+  <link href="../css/style.css" rel="stylesheet" />
+  <link href="../css/style-responsive.css" rel="stylesheet" />
+     <!--pickers css-->
+  <link rel="stylesheet" type="text/css" href="../js/bootstrap-datepicker/css/datepicker-custom.css" />
+  <link rel="stylesheet" type="text/css" href="../js/bootstrap-timepicker/css/timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="../js/bootstrap-colorpicker/css/colorpicker.css" />
+  <link rel="stylesheet" type="text/css" href="../js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+  <link rel="stylesheet" type="text/css" href="../js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+   <%-- editors css--%>
+    <link rel="stylesheet" type="text/css" href="../js/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
+  <link href="../css/style.css" rel="stylesheet" />
+  <link href="../css/style-responsive.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+</head>
+   
+<body class="sticky-header">
+ <form id="form1" runat="server">
+     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <a href="index.html"><img src="../images/logo.png" alt="" /></a>
+        </div>
+
+        <div class="logo-icon text-center">
+            <a href="index.html"><img src="../images/logo_icon.png" alt="" /></a>
+        </div>
+        <!--logo and iconic logo end-->
+
+
+        <div class="left-side-inner">
+
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="../images/photos/user-avatar.png" class="media-object" />
+                    <div class="media-body">
+                        <h4><a href="#">John Doe</a></h4>
+                        <span>"Hello There..."</span>
+                    </div>
+                </div>
+
+                <h5 class="left-nav-title">Account Information</h5>
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    <li><a href="#"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                </ul>
+            </div>
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                   <ul class="nav nav-pills nav-stacked custom-nav">
+                <li><a href="StudentsManage.aspx"><i class="fa fa-home"></i> <span>学生课程</span></a> </li>
+                <li><a href="Settiingsaspx.aspx"><i class="fa fa-laptop"></i> <span>个人设置</span></a></li>
+                <li><a href="AddHomework.aspx"><i class="fa fa-book"></i> <span>布置作业</span></a></li>
+                <li><a href="ReviewHomework.aspx"><i class="fa fa-cogs"></i> <span>批阅作业</span></a></li>
+                <li><a href="ManageHw.aspx"><i class="fa fa-bullhorn"></i> <span>管理展示</span></a></li>
+                 <li><a href="Timeline.aspx"><i class="fa fa-file-text"></i> <span>时间线</span></a></li>
+                  <li><a href="Profile.aspx"><i class="fa fa-user"></i> <span>作者简介</span></a></li>
+
+               
+                
+            </ul>
+
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+         <!-- header section start-->
+        <div class="header-section">
+
+        <!--toggle button start-->
+        <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+        <!--toggle button end-->
+
+        <!--search start-->
+        <div class="searchform" >
+            <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
+        </div>
+        <!--search end-->
+  
+     <div class="menu-right">
+                <ul class="notification-menu">
+                    <li>
+                        <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                            <i class="fa fa-tasks"></i>
+                            <span class="badge">5</span>  <%--后端数据库调用--%>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-head pull-right">
+                        
+                                             
+                            <ul class="dropdown-list user-list">
+                                <asp:Repeater ID="Rtnotice" runat="server">  
+                                    <HeaderTemplate>
+                                      <h5 class="title">近期公告</h5>     
+                                    </HeaderTemplate>
+                                    <ItemTemplate><li class="new">
+                                    <a href="#">
+                                        <div class="task-info">
+                                            <div><%#Eval("noticeName") %></div>
+                                        </div>
+                                      <%--  <div class="progress progress-striped">
+                                            <div style="width: 90%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" role="progressbar" class="progress-bar progress-bar-success">
+                                                <span class="">90%</span>
+                                            </div>
+                                        </div>--%>
+                                    </a>
+                                </li>
+
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                         <li class="new"><a href="ManageHw.aspx">查看更多公告</a></li>  <%--这个再想一想--%>
+                                    </FooterTemplate>
+                                </asp:Repeater>
+                               
+                               
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="badge">5</span>  <%--这个是优秀作业，也是通过后端调用--%>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-head pull-right">
+                            <h5 class="title">最近上传的优秀作业同学</h5>
+
+                            <ul class="dropdown-list normal-list">
+                                <asp:Repeater ID="Rpcontent2" runat="server">
+                                    <ItemTemplate>
+                                          <li class="new">
+                                    <a href="">
+                                        <span class="thumb">  <asp:Image ID="Image1" runat="server" ImageUrl='<%#Eval("image") %>'/></span>
+                                        <span class="desc">
+                                          <span class="name"><%#Eval("stuName") %> <span class="badge badge-success">hot</span></span>
+                                          <span class="msg">  <%#Eval("subntice") %></span>
+                                        </span>
+                                    </a>
+                                </li>       
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                 <li class="new"><a href="ManageHw.aspx">查看所有的优秀作业</a></li>        
+                                    </FooterTemplate>
+                                </asp:Repeater>
+  
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="badge">4</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-head pull-right">
+                            <h5 class="title">查看已经布置的的作业</h5>
+                              <ul class="dropdown-list normal-list">
+                            <asp:Repeater ID="Repeater1" runat="server">
+                                <ItemTemplate>
+                                 
+                                <li class="new">
+                                    <a href="ManageHw.aspx">
+                                        <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                                        <span class="name"><%#Eval("workTitle") %> </span>
+                                        <em class="small">截止时间<%#Eval("CloseTime") %></em>
+                                    </a>
+                                </li>
+                                  </ItemTemplate>
+                                  <FooterTemplate>
+                               <li class="new"><a href="ManageHw.aspx">点此继续查看</a></li> 
+                                  </FooterTemplate>                               
+                            </asp:Repeater>
+                            </ul> 
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <asp:Image ID="Image1" runat="server" />
+                         <asp:Literal ID="Literalteacher" runat="server"></asp:Literal>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                            <li><a href="Profile.aspx"><i class="fa fa-user"></i>  个人简介</a></li>                 
+                            <li><a href="../Login.aspx"><i class="fa fa-sign-out"></i> 注销</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>    
+
+        </div>
+    <!-- page heading start-->
+       
+   <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+       <!--footer section start-->
+        <footer class="sticky-footer">
+            2017 &copy; Homework Management System BY 陈旋
+        </footer>
+        <!--footer section end-->
+        </div>
+        <!-- header section end-->
+
+    
+
+ 
+
+
+   
+    <!-- main content end-->
+</section>
+</form>
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="../js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="../js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/modernizr.min.js"></script>
+<script src="../js/jquery.nicescroll.js"></script>
+    
+
+<!--data table-->
+<script type="text/javascript" src="../js/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../js/data-tables/DT_bootstrap.js"></script>
+    <!--script for editable table-->
+<script src="../js/editable-table.js"></script>
+   <%-- script for editors--%>
+   <script type="text/javascript" src="../js/ckeditor/ckeditor.js"></script>
+
+<script type="text/javascript" src="../js/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+<script type="text/javascript" src="../js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+    <!--pickers plugins-->
+<script type="text/javascript" src="../js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="../js/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="../js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="../js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+<!--pickers initialization-->
+<script src="../js/pickers-init.js"></script>
+
+<!-- END JAVASCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>
+        <script>
+    jQuery(document).ready(function(){
+         $('.wysihtml5').wysihtml5();
+    });
+</script>
+   
+<!--common scripts for all pages-->
+<script src="../js/scripts.js"></script>
+
+</body>
+</html>
+
